@@ -1,6 +1,6 @@
 package controle;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Filme;
@@ -26,7 +26,7 @@ public class FilmeDAO {
 		
 		//update
 		
-		public boolean atualizar(Filme f, String nomeFilme, LocalDateTime horarioFilme) {
+		public boolean atualizar(Filme f, String nomeFilme, LocalDate horarioFilme) {
 			
 			for (Filme filme : tabelaFilmes) {
 				
@@ -44,7 +44,7 @@ public class FilmeDAO {
 		
 		// delete
 		
-		public boolean excluir(Filme f, String nomeFilme, LocalDateTime horarioFilme) {
+		public boolean excluir(Filme f, String nomeFilme, LocalDate horarioFilme) {
 			
 			for (Filme filme : tabelaFilmes) {
 				if(filme.getNomeFilme() == nomeFilme && filme.getHorarioFilme() == horarioFilme) {
