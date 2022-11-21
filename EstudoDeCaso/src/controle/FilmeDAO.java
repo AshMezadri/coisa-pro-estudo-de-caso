@@ -1,66 +1,72 @@
 package controle;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Filme;
+import modelo.IFilmeDAO;
 
-public class FilmeDAO {
+public class FilmeDAO implements IFilmeDAO {
 
-		private ArrayList<Filme> tabelaFilmes;
-		
-		public FilmeDAO() {
-			this.tabelaFilmes = new ArrayList<>();
+	private static ArrayList<Filme> tabelaFilmes;
+	private static FilmeDAO instancia;
+
+	private FilmeDAO() {
+	}
+
+	public static FilmeDAO getInstancia() {
+
+		if (instancia == null) {
+			instancia = new FilmeDAO();
+			tabelaFilmes = new ArrayList<>();
+			
+			
 		}
-		
-		//inserir
-		
-		public boolean inserir(Filme f) {
-			if (f != null) {
-				tabelaFilmes.add(f);
+
+		return instancia;
+	}
+
+	// inserir
+	@Override
+	public boolean inserir(Filme f) {
+		if (f != null) {
+			tabelaFilmes.add(f);
+			return true;
+
+		}
+		return false;
+	}
+
+	// update
+	@Override
+	public boolean atualizar(Filme f, int codFilme) {
+
+		for (Filme filme : tabelaFilmes) {
+
+			if (filme.getCodFilme() == codFilme) {
+
+			}
+		}
+		return false;
+	}
+
+	// delete
+	@Override
+	public boolean excluir(Filme f, int codFilme) {
+
+		for (Filme filme : tabelaFilmes) {
+			if (filme.getCodFilme() == codFilme) {
+				tabelaFilmes.remove(filme);
 				return true;
-				
 			}
-			return false;
 		}
-		
-		//update
-		
-		public boolean atualizar(Filme f, String nomeFilme, LocalDate horarioFilme) {
-			
-			for (Filme filme : tabelaFilmes) {
-				
-				if (filme.getNomeFilme() == nomeFilme) {
-					
-					filme.setNomeFilme(f.getNomeFilme());
-					filme.setHorarioFilme(f.getHorarioFilme());
-					return true;
-				}
-			}
-			
-			return false;
-			
-		}
-		
-		// delete
-		
-		public boolean excluir(Filme f, String nomeFilme, LocalDate horarioFilme) {
-			
-			for (Filme filme : tabelaFilmes) {
-				if(filme.getNomeFilme() == nomeFilme && filme.getHorarioFilme() == horarioFilme) {
-					
-					tabelaFilmes.remove(filme);
-					return true;
-				}
-			}
-			
-			return false;
-		}
-		
-		//select all
-		
-		public ArrayList<Filme> listaFilmes(){
-			
-			return this.tabelaFilmes;
-		}
+
+		return false;
+	}
+
+	// select all
+	@Override
+	public ArrayList<Filme> listaFilmes() {
+
+		return tabelaFilmes;
+	}
 }
